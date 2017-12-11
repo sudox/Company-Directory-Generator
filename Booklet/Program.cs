@@ -34,6 +34,11 @@ namespace Booklet
 
             for (int i = 1; i <= rowCount; i++)
             {
+                string movie = "";
+                if(xlRange.Cells[i, 2].Value2 != null)
+                {
+                    movie = xlRange.Cells[i, 2].Value2.ToString();
+                }
                 if (departmentName)
                 {
                     departments.Add(xlRange.Cells[i, 1].Value2.ToString());
@@ -41,7 +46,11 @@ namespace Booklet
                     i++;
                     i++;
                     List<string> temp = new List<string>();
-                    temp.Add(xlRange.Cells[i, 1].Value2.ToString() + " - " + xlRange.Cells[i, 2].Value2.ToString());
+                    if(xlRange.Cells[i, 2].Value2 != null)
+                    {
+                        movie = xlRange.Cells[i, 2].Value2.ToString();
+                    }
+                    temp.Add(xlRange.Cells[i, 1].Value2.ToString() + " - " + movie);
                     names.Add(temp);
                     continue;
                 }
@@ -59,7 +68,7 @@ namespace Booklet
                 //    names.Add(temp);
                 //    continue;
                 //}
-                names[departments.Count - 1].Add(xlRange.Cells[i, 1].Value2.ToString() + " - " + xlRange.Cells[i, 2].Value2.ToString());
+                names[departments.Count - 1].Add(xlRange.Cells[i, 1].Value2.ToString() + " - " + movie);
             }
             Marshal.ReleaseComObject(xlRange);
             Marshal.ReleaseComObject(xlWorksheet);
